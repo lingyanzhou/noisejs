@@ -51,7 +51,10 @@ function drawFrame() {
   var cHeight = canvas.height;
 
   var max = -Infinity, min = Infinity;
-  var noisefn = fn === 'simplex' ? noise.simplex3 : noise.perlin3;
+
+  var seed = Math.random();
+  var noise = noise.Noise(seed);
+  var noisefn = fn === 'simplex' ? noise.simplex3.bind(noise) : noise.perlin3.bind(noise);
 
   for (var x = 0; x < cWidth; x++) {
     for (var y = 0; y < cHeight; y++) {
